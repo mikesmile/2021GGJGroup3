@@ -1,18 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class StageManager : Singleton<StageManager>
 {
-    // Start is called before the first frame update
+    [SerializeField]
+    private StageStatus status;
+
     void Start()
     {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        this.status.Reset();
     }
 }
