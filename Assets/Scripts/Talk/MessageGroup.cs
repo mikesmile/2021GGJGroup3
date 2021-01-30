@@ -12,4 +12,7 @@ public class MessageGroup : ScriptableObject
     // TODO: encapsulate this field to be modified outside
     [TextArea]
     public string Message;
+    [field : SerializeField]
+    public TextAsset[] messages { get; private set; }
+
 }
