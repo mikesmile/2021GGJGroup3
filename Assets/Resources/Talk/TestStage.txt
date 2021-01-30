@@ -1,0 +1,5 @@
+[show-left]
+[b]測試測試[l]，這是開頭劇情喔。
+[w][show-right]
+[b]好油喔 peko
+[w]沒了。[end]

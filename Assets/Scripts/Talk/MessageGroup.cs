@@ -9,10 +9,8 @@ public class MessageGroup : ScriptableObject
     [field : SerializeField]
     public Sprite rightSprite { get; private set; }
 
-    // TODO: encapsulate this field to be modified outside
-    [TextArea]
-    public string Message;
-    [field : SerializeField]
-    public TextAsset[] messages { get; private set; }
+    [SerializeField]
+    private TextAsset messagesFile;
+    public string Message => this.messagesFile.text;
 
 }

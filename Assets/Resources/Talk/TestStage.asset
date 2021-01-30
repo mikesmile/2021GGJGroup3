@@ -12,16 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fceaf96409d9a444c8641d6a3df7c580, type: 3}
   m_Name: TestStage
   m_EditorClassIdentifier: 
-  <leftSprite>k__BackingField: {fileID: 10907, guid: 0000000000000000f000000000000000,
-    type: 0}
-  <rightSprite>k__BackingField: {fileID: 10907, guid: 0000000000000000f000000000000000,
-    type: 0}
-  Message: '[show-left]
-
-    [b]hello[l][hind-left]
-
-    [b][show-right][l]
-
-    hello
-    again.'
-  <messages>k__BackingField: []
+  <leftSprite>k__BackingField: {fileID: 21300000, guid: 0867cf41af33f8940b8cd53cb249b33d,
+    type: 3}
+  <rightSprite>k__BackingField: {fileID: 21300000, guid: 5cd3d19d8fe8c9a44a52be9268700a50,
+    type: 3}
+  messagesFile: {fileID: 4900000, guid: 273929f5175eb31448ac81fcb201691a, type: 3}
