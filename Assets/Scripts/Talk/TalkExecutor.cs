@@ -2,19 +2,21 @@
 using DG.Tweening;
 using RemptyTool.ES_MessageSystem;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.UI;
-
+[RequireComponent(typeof(ES_MessageSystem))]
 public class TalkExecutor : MonoBehaviour
 {
+    public UnityEvent OnMessageEnd;
     [SerializeField]
     private Image leftImage;
     [SerializeField]
     private Image rightImage;
     [SerializeField]
     private Text text;
-
     [field : SerializeField]
     public MessageGroup MessageGroup { get; private set; }
+
     public ES_MessageSystem messageSystem { get; private set; }
     public string Message => this.messageSystem.text;
 
@@ -23,12 +25,15 @@ public class TalkExecutor : MonoBehaviour
         this.messageSystem = GetComponent<ES_MessageSystem>();
         this.leftImage.sprite = this.MessageGroup.leftSprite;
         this.rightImage.sprite = this.MessageGroup.rightSprite;
+        // character sprite control
         for(int i = 0; i < 2; i++)
             for(int j = 0; j < 2; j++)
                 this.messageSystem.AddSpecialCharToFuncMap(
                     (i == 0 ? "show" : "hide") + "-" + (j == 0 ? "left" : "right"),
                     this.spriteAction(i, j)
                 );
+        // end event
+        this.messageSystem.AddSpecialCharToFuncMap("end", this.OnMessageEnd.Invoke);
         this.messageSystem.SetText(this.MessageGroup.Message);
     }
 
