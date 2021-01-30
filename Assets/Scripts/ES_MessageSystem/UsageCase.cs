@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEngine;
 using RemptyTool.ES_MessageSystem;
+using UnityEngine;
 
 [RequireComponent(typeof(ES_MessageSystem))]
 public class UsageCase : MonoBehaviour
@@ -15,7 +15,7 @@ public class UsageCase : MonoBehaviour
     void Start()
     {
         msgSys = this.GetComponent<ES_MessageSystem>();
-        if (uiText == null)
+        if(uiText == null)
         {
             Debug.LogError("UIText Component not assign.");
         }
@@ -37,7 +37,7 @@ public class UsageCase : MonoBehaviour
         textList = new List<string>();
         textIndex = 0;
         var lineTextData = _textAsset.text.Split('\n');
-        foreach (string line in lineTextData)
+        foreach(string line in lineTextData)
         {
             textList.Add(line);
         }
@@ -45,29 +45,29 @@ public class UsageCase : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S))
+        if(Input.GetKeyDown(KeyCode.S))
         {
             //You can sending the messages from strings or text-based files.
-            if (msgSys.IsCompleted)
+            if(msgSys.IsCompleted)
             {
                 msgSys.SetText("Send the messages![lr] HelloWorld![w]");
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if(Input.GetKeyDown(KeyCode.Space))
         {
             //Continue the messages, stoping by [w] or [lr] keywords.
             msgSys.Next();
         }
 
         //If the message is complete, stop updating text.
-        if (msgSys.IsCompleted == false)
+        if(msgSys.IsCompleted == false)
         {
             uiText.text = msgSys.text;
         }
 
         //Auto update from textList.
-        if (msgSys.IsCompleted == true && textIndex < textList.Count)
+        if(msgSys.IsCompleted == true && textIndex < textList.Count)
         {
             msgSys.SetText(textList[textIndex]);
             textIndex++;

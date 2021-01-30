@@ -1,7 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System;
 
 namespace RemptyTool.ES_MessageSystem
 {
@@ -42,6 +42,7 @@ namespace RemptyTool.ES_MessageSystem
             specialCharFuncMap.Add("r", () => StartCoroutine(CmdFun_r_Task()));
             specialCharFuncMap.Add("l", () => StartCoroutine(CmdFun_l_Task()));
             specialCharFuncMap.Add("lr", () => StartCoroutine(CmdFun_lr_Task()));
+            specialCharFuncMap.Add("b", () => this.msgText = this.msgText.Remove(this.msgText.Length - 1));
         }
 
         #region Public Function
@@ -83,7 +84,7 @@ namespace RemptyTool.ES_MessageSystem
             IsOnCmdEvent = true;
             IsWaitingForNextToGo = true;
             yield return new WaitUntil(() => IsWaitingForNextToGo == false);
-            msgText = "";   //Erase the messages.
+            msgText = ""; //Erase the messages.
             IsOnCmdEvent = false;
             yield return null;
         }
@@ -106,9 +107,9 @@ namespace RemptyTool.ES_MessageSystem
         }
         private SpecialCharType CheckSpecialChar(char _char)
         {
-            if (_char == SPECIAL_CHAR_STAR)
+            if(_char == SPECIAL_CHAR_STAR)
             {
-                if (lastChar == SPECIAL_CHAR_STAR)
+                if(lastChar == SPECIAL_CHAR_STAR)
                 {
                     specialCmd = "";
                     IsOnSpecialChar = false;
@@ -117,13 +118,13 @@ namespace RemptyTool.ES_MessageSystem
                 IsOnSpecialChar = true;
                 return SpecialCharType.CmdChar;
             }
-            else if (_char == SPECIAL_CHAR_END && IsOnSpecialChar)
+            else if(_char == SPECIAL_CHAR_END && IsOnSpecialChar)
             {
                 //exe cmd!
-                if (specialCharFuncMap.ContainsKey(specialCmd))
+                if(specialCharFuncMap.ContainsKey(specialCmd))
                 {
                     specialCharFuncMap[specialCmd]();
-                    //Debug.Log("The keyword : [" + specialCmd + "] execute!");
+                    Debug.Log("The keyword : [" + specialCmd + "] execute!");
                 }
                 else
                     Debug.LogError("The keyword : [" + specialCmd + "] is not exist!");
@@ -131,7 +132,7 @@ namespace RemptyTool.ES_MessageSystem
                 IsOnSpecialChar = false;
                 return SpecialCharType.EndChar;
             }
-            else if (IsOnSpecialChar)
+            else if(IsOnSpecialChar)
             {
                 specialCmd += _char;
                 return SpecialCharType.CmdChar;
@@ -143,9 +144,9 @@ namespace RemptyTool.ES_MessageSystem
             IsOnSpecialChar = false;
             IsMsgCompleted = false;
             specialCmd = "";
-            for (int i = 0; i < _text.Length; i++)
+            for(int i = 0; i < _text.Length; i++)
             {
-                switch (CheckSpecialChar(_text[i]))
+                switch(CheckSpecialChar(_text[i]))
                 {
                     case SpecialCharType.NormalChar:
                         AddChar(_text[i]);
@@ -162,4 +163,3 @@ namespace RemptyTool.ES_MessageSystem
         #endregion
     }
 }
-
