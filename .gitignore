@@ -60,3 +60,6 @@ sysinfo.txt
 # Crashlytics generated file
 crashlytics-build.properties
 
+# scenes for testing
+*.test.unity
+*.test.unity.meta
