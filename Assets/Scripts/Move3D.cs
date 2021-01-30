@@ -8,6 +8,7 @@ public enum SIDE{ Left, Mid, Right }
 
 public class Move3D : MonoBehaviour
 {
+    public Vector3 rootPosition;
     public SIDE m_Side = SIDE.Mid;
     float NewXPos = 0f;
     public bool SwipeLeft;
@@ -17,7 +18,7 @@ public class Move3D : MonoBehaviour
 
     void Start()
     {
-        transform.position = new Vector3(0,0,6);
+        transform.position = rootPosition;
         m_char = GetComponent<CharacterController>();
     }
 

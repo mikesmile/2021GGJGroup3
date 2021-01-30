@@ -18,24 +18,6 @@ public class Config : MonoBehaviour {
     public static int rootYear = 1987;
 
 
-    [HideInInspector]
-    public static Texture2D tempScreenShot;//暫存用截圖(未儲存
-
-    public enum Language {
-
-        NONE,
-        EN,
-        TW,
-        CN,
-    }
-
-    public enum DialogSpeed {
-        slow,
-        medium,
-        fast,
-    }
-
-   
 
     void Awake()
     {
@@ -71,6 +53,12 @@ public class Config : MonoBehaviour {
     //    audio.SfxVolume = SaveDataHandler.Self.saveData.soundVolume;
     //}
 
+    public void RandomInitObject()
+    {
+        int r = UnityEngine.Random.Range(0,2);
+
+        Debug.LogError(r);
+    }
     
 
     [RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSceneLoad )]

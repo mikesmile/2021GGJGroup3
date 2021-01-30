@@ -23,11 +23,11 @@ public class Test : MonoBehaviour
     }
 
 
-    public void ChangeScene()
+    public void ChangeScene( string name )
     {
-        TransitionPanel.Self.LoadScene("SampleScene"); 
-
+        TransitionPanel.Self.LoadScene( name ); 
     }
+
 
 
 }
