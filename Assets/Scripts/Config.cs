@@ -81,12 +81,12 @@ public class Config : MonoBehaviour {
         DontDestroyOnLoad( config );
     }
 
-    //[RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSceneLoad )]
-    //public static void LoadTransition() {
-
-    //    GameObject transitionCanvas = Instantiate( Resources.Load<GameObject>( "Prefabs/Base/TransitionCanvas" ) );
-    //    DontDestroyOnLoad( transitionCanvas );
-    //}
+    [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.BeforeSceneLoad)]
+    public static void LoadTransition()
+    {
+        GameObject transitionCanvas = Instantiate(Resources.Load<GameObject>("Prefabs/TransitionCanvas"));
+        DontDestroyOnLoad(transitionCanvas);
+    }
 
 
     //[RuntimeInitializeOnLoadMethod( RuntimeInitializeLoadType.BeforeSceneLoad )]
