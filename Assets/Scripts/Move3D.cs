@@ -8,17 +8,23 @@ public enum SIDE { Left, Mid, Right }
 
 public class Move3D : MonoBehaviour
 {
-    public Vector3 rootPosition;
     public SIDE m_Side = SIDE.Mid;
     float NewXPos = 0f;
     public bool SwipeLeft;
     public bool SwipeRight;
+    public bool SwipeFoward;
     public float XValue;
+    public static bool factorR = false;
+    public static bool factorL = false;
+    public static bool factorF = false;
     private CharacterController m_char;
+    public GameObject Target;
+    public Transform trn;
 
     void Start()
     {
-        transform.position = rootPosition;
+        transform.position = new Vector3(0,0,6);
+        this.trn = GetComponent<Transform>();
         m_char = GetComponent<CharacterController>();
     }
 
@@ -33,12 +39,12 @@ public class Move3D : MonoBehaviour
         {
             if(m_Side == SIDE.Mid)
             {
-                m_Side = SIDE.Left;
+                m_Side = SIDe.Left;
                 m_char.Move(mMovedir * XValue);
             }
             else if(m_Side == SIDE.Right)
             {
-                m_Side = SIDE.Mid;
+                m_Side = SIDe.Mid;
                 m_char.Move(mMovedir * XValue);
             }
         }
@@ -46,13 +52,25 @@ public class Move3D : MonoBehaviour
         {
             if(m_Side == SIDE.Mid)
             {
-                m_Side = SIDE.Right;
+                m_Side = SIDe.Right;
                 m_char.Move(Movedir * XValue);
             }
             else if(m_Side == SIDE.Left)
             {
-                m_Side = SIDE.Mid;
+                m_Side = SIDe.Mid;
                 m_char.Move(Movedir * XValue);
+            }
+        }
+
+        if (Target.transform.position.z - this.trn.position.z < 1)
+        {
+            Debug.Log(0);
+            if (SwipeFoward)
+            {
+                Debug.Log(5);
+                factorF = true;
+                factorR = false;
+                factorL = false;
             }
         }
     }
