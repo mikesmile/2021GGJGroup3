@@ -348,7 +348,6 @@ GameObject:
   - component: {fileID: 5948700255049890718}
   - component: {fileID: 5948700255049890719}
   - component: {fileID: 5948700255049890716}
-  - component: {fileID: 576623637}
   m_Layer: 5
   m_Name: MessageUI
   m_TagString: Untagged
@@ -394,7 +393,7 @@ MonoBehaviour:
   OnMessageEnd:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 576623637}
+      - m_Target: {fileID: 0}
         m_MethodName: Do
         m_Mode: 1
         m_Arguments:
@@ -426,21 +425,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textSpeed: 0.01
---- !u!114 &576623637
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5948700255049890713}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99ddf41360f01a14ea2592328eed528a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  target: {fileID: 0}
-  duration: 0.2
-  autoDisable: 0
 --- !u!1 &5948700255514570706
 GameObject:
   m_ObjectHideFlags: 0
