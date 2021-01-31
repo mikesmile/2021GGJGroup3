@@ -10,7 +10,7 @@ public class Test : MonoBehaviour
     {
         
     }
-    // Start is called before the first frame update
+    public static bool S_BGM = false;
     void Start()
     {
         
@@ -26,6 +26,7 @@ public class Test : MonoBehaviour
     public void ChangeScene( string name )
     {
         TransitionPanel.Self.LoadScene( name ); 
+        S_BGM = true;
     }
 
 
