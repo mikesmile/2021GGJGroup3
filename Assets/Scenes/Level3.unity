@@ -6708,7 +6708,7 @@ MonoBehaviour:
   hitPower: 18
   HittiingSound: {fileID: 275848110184074406, guid: d97e8fd9b1ac0fa49b8823611c27f756,
     type: 3}
-  Life_Losing_Sound: {fileID: 3076111664680329155, guid: bca971b7f1152e74684dd9a6a7e4fa63,
+  Life_Losing_Sound: {fileID: 3076111664680329155, guid: 201a15e857cdc7d4a9de8f2df7ac8190,
     type: 3}
   status: {fileID: 11400000, guid: 09cc99ea922546841a235a092287154f, type: 2}
   Hit: 0

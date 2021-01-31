@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 [System.Serializable]
@@ -30,7 +31,6 @@ public class Move3D : MonoBehaviour
     private StageStatus status;
     public bool Hit;
 
-
     //private GameObject fx;
     // HACK: prevent duplicated trigger
     private bool hasBeenHit;
@@ -49,6 +49,10 @@ public class Move3D : MonoBehaviour
         noHitPosition = transform.localPosition;
         m_char = GetComponent<CharacterController>();
         mainAnimator = GetComponent<Animator>();
+        this.status.Score
+            .Where(s => s > 30)
+            .Subscribe(s => TransitionPanel.Self.LoadScene("After-Stage-1"))
+            .AddTo(this);
     }
 
     // Update is called once per frame
@@ -60,14 +64,14 @@ public class Move3D : MonoBehaviour
         Vector3 Movedir = new Vector3(1, 0, 0);
         Vector3 mMovedir = new Vector3(-1, 0, 0);
 
-        if (SwipeLeft)
+        if(SwipeLeft)
         {
             currentUse = UseBtn.Left;
             mainAnimator.SetTrigger("Left");
-            if (m_Side == SIDE.Mid)
+            if(m_Side == SIDE.Mid)
             {
                 Hit = true;
-                noHitPosition = transform.localPosition;//等待受擊位置更新
+                noHitPosition = transform.localPosition; //等待受擊位置更新
                 m_Side = SIDE.Left;
 
                 m_char.Move(mMovedir * XValue);
@@ -90,7 +94,7 @@ public class Move3D : MonoBehaviour
             Hit = true;
             currentUse = UseBtn.Right;
             mainAnimator.SetTrigger("Right");
-            if (m_Side == SIDE.Mid)
+            if(m_Side == SIDE.Mid)
             {
                 noHitPosition = transform.localPosition;
                 m_Side = SIDE.Right;
@@ -111,7 +115,7 @@ public class Move3D : MonoBehaviour
             }
         }
 
-        if (SwipeForward)
+        if(SwipeForward)
         {
             Hit = true;
             currentUse = UseBtn.Forward;
@@ -120,10 +124,9 @@ public class Move3D : MonoBehaviour
             _timer = Time.time;
         }
 
-
-        if (countdown) //給他一秒時間重返狀態
+        if(countdown) //給他一秒時間重返狀態
         {
-            if (Time.time > _timer + 0.5f)
+            if(Time.time > _timer + 0.5f)
             {
                 if(currentUse != UseBtn.None) currentUse = UseBtn.None;
 
@@ -132,7 +135,7 @@ public class Move3D : MonoBehaviour
             }
         }
 
-        if(currentUse != UseBtn.Forward )
+        if(currentUse != UseBtn.Forward)
         {
             if(currentUse != UseBtn.Right && currentUse != UseBtn.Left)
             {
@@ -140,9 +143,6 @@ public class Move3D : MonoBehaviour
             }
         }
     }
-
-
-
 
     private void OnTriggerEnter(Collider other)
     {
@@ -152,7 +152,7 @@ public class Move3D : MonoBehaviour
         // }
 
         // if (other.tag == "CanHit" && currentUse != UseBtn.None)
-        if (other.tag == "CanHit")
+        if(other.tag == "CanHit")
         {
 
             this.hasBeenHit = !this.hasBeenHit;
@@ -162,12 +162,12 @@ public class Move3D : MonoBehaviour
             {
                 other.GetComponent<obstacleRun>().stopRun = true;
                 other.GetComponent<obstacleRun>().objectPoolHitBack = true;
-                other.GetComponent<obstacleRun>()._timer = Time.time;//reset timer
+                other.GetComponent<obstacleRun>()._timer = Time.time; //reset timer
 
                 var rb = other.GetComponent<Rigidbody>();
                 rb.isKinematic = false;
 
-                if (other.transform.localPosition.x < noHitPosition.x - hitRadio && currentUse == UseBtn.Left) //往左撞
+                if(other.transform.localPosition.x < noHitPosition.x - hitRadio && currentUse == UseBtn.Left) //往左撞
                 {
                     rb.velocity = (Vector2.left + Vector2.up) * hitPower;
                     //fx = Instantiate(Resources.Load<GameObject>("FX/hit_vfx"), this.transform);
@@ -176,7 +176,7 @@ public class Move3D : MonoBehaviour
                     status.AddScore(3);
                     Instantiate(HittiingSound);
                 }
-                else if (other.transform.localPosition.x > noHitPosition.x + hitRadio && currentUse == UseBtn.Right)//往右撞
+                else if(other.transform.localPosition.x > noHitPosition.x + hitRadio && currentUse == UseBtn.Right) //往右撞
                 {
                     rb.velocity = (Vector2.right + Vector2.up) * hitPower;
                     //fx = Instantiate(Resources.Load<GameObject>("FX/hit_vfx"), this.transform);
@@ -185,7 +185,7 @@ public class Move3D : MonoBehaviour
                     status.AddScore(3);
                     Instantiate(HittiingSound);
                 }
-                else if (currentUse == UseBtn.Forward)//往前撞
+                else if(currentUse == UseBtn.Forward) //往前撞
                 {
                     rb.velocity = (Vector3.forward + Vector3.up) * hitPower;
                     //fx = Instantiate(Resources.Load<GameObject>("FX/hit_vfx"), this.transform);
@@ -194,8 +194,10 @@ public class Move3D : MonoBehaviour
                     status.AddScore(3);
                     Instantiate(HittiingSound);
                 }
-                
-            } else {
+
+            }
+            else
+            {
                 Instantiate(Life_Losing_Sound);
                 status.Hit();
 
@@ -206,14 +208,13 @@ public class Move3D : MonoBehaviour
             }
         }
         currentUse = UseBtn.None;
-        noHitPosition = transform.localPosition;//無真正受傷撞擊時更新位置
+        noHitPosition = transform.localPosition; //無真正受傷撞擊時更新位置
 
     }
 
-    public Vector3 GetRandomVector3( Vector3 origin )
+    public Vector3 GetRandomVector3(Vector3 origin)
     {
         int r = UnityEngine.Random.Range(0, 10);
         return origin * r;
     }
 }
-

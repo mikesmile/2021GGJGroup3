@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <leftSprite>k__BackingField: {fileID: 21300000, guid: cf7c3d5ec54127d489cd32050d256bf0,
     type: 3}
-  <rightSprite>k__BackingField: {fileID: 21300000, guid: 8c38157b878119a4195a96205c1e84a2,
+  <rightSprite>k__BackingField: {fileID: 21300000, guid: 1ade5fc154c2b497eaaf11e3cba37581,
     type: 3}
   backgrounds:
   - {fileID: 21300000, guid: dac68e72f4c268744bbde2444c9411ae, type: 3}
