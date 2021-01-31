@@ -42,6 +42,7 @@ namespace RemptyTool.ES_MessageSystem
             specialCharFuncMap.Add("r", () => StartCoroutine(CmdFun_r_Task()));
             specialCharFuncMap.Add("l", () => StartCoroutine(CmdFun_l_Task()));
             specialCharFuncMap.Add("lr", () => StartCoroutine(CmdFun_lr_Task()));
+            // Remove last character from text
             specialCharFuncMap.Add("b", () => this.msgText = this.msgText.Remove(this.msgText.Length - 1));
         }
 
