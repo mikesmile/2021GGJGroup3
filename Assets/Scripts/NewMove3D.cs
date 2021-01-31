@@ -6,7 +6,7 @@ using UnityEngine;
 
 public enum SIDe{ Left, Mid, Right }
 
-public class Move3D : MonoBehaviour
+public class NewMove3D : MonoBehaviour
 {
     public SIDe m_Side = SIDe.Mid;
     float NewXPos = 0f;
