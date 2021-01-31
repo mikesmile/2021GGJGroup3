@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fceaf96409d9a444c8641d6a3df7c580, type: 3}
+  m_Name: Opening
+  m_EditorClassIdentifier: 
+  <leftSprite>k__BackingField: {fileID: 0}
+  <rightSprite>k__BackingField: {fileID: 0}
+  backgrounds: []
+  headlines:
+  - ???
+  - "\u8C93\u54AA\u5973\u795E"
+  messagesFile: {fileID: 4900000, guid: 143b08ee45d24de41a49ee4f5ad7f3c1, type: 3}

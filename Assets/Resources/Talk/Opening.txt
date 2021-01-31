@@ -1,0 +1,2 @@
+[head 0]我是一隻貓。
+[w][head 1]not waifu, friends!
