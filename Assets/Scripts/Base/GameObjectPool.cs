@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor.Animations;
 
 public class GameObjectPool : UIBase<GameObjectPool>
 {
@@ -24,7 +25,7 @@ public class GameObjectPool : UIBase<GameObjectPool>
         }
     }
 
-    public GameObject GetPooledInstance(Transform parent, Sprite sprite )
+    public GameObject GetPooledInstance(Transform parent, Sprite sprite, AnimatorController animator )
     {
         //Debug.LogError(parent.gameObject.name);
 
@@ -37,14 +38,16 @@ public class GameObjectPool : UIBase<GameObjectPool>
                 //if(boxCollider != null) Destroy(boxCollider);
 
                 m_availableObjects.RemoveAt(lastIndex);
-                go.GetComponent<SpriteRenderer>().sprite = sprite;
+                if(sprite != null) go.GetComponent<SpriteRenderer>().sprite = sprite;
+                if(animator != null ) go.GetComponent<Animator>().runtimeAnimatorController = animator;
 
-                if (canHitData.Contains(sprite))
+                if (sprite == null)
                     go.tag = "CanHit";
                 else
                     go.tag = "CanNotHit";
 
                 go.SetActive(true);
+
                 //go.AddComponent<BoxCollider>();
                 //go.GetComponent<BoxCollider>().isTrigger = true;
 
