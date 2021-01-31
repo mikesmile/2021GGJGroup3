@@ -69,7 +69,7 @@ public class Ground : MonoBehaviour
             obstacleCopy.GetComponent<SpriteRenderer>().sprite = null;
             obstacleCopy.transform.localScale = new Vector3(3, 3, 1);
             //GameObject obstacleCopy = ObjectPool.Self.ReUse(new Vector3(x, 4, 11), Quaternion.identity, spawn);
-            obstacleCopy.transform.localPosition = new Vector3(x, 4.31f, 11);
+            obstacleCopy.transform.localPosition = new Vector3(x, 6f, 11);
             //var obstacleCopy = Instantiate<GameObject>(spawn, new Vector3(x, 4, 11), Quaternion.identity );
             obstacleCopy.GetComponent<obstacleRun>().Init(transform.localPosition, -26, obstacleSpeed);
 

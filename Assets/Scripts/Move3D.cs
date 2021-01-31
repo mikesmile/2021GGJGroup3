@@ -26,7 +26,12 @@ public class Move3D : MonoBehaviour
     private Animator mainAnimator;
     public GameObject HittiingSound;
     public GameObject Life_Losing_Sound;
+    [SerializeField]
+    private StageStatus status;
     public bool Hit;
+
+
+    //private GameObject fx;
     // HACK: prevent duplicated trigger
     private bool hasBeenHit;
 
@@ -149,6 +154,7 @@ public class Move3D : MonoBehaviour
         // if (other.tag == "CanHit" && currentUse != UseBtn.None)
         if (other.tag == "CanHit")
         {
+
             this.hasBeenHit = !this.hasBeenHit;
             if(this.hasBeenHit)
                 return;
@@ -164,21 +170,39 @@ public class Move3D : MonoBehaviour
                 if (other.transform.localPosition.x < noHitPosition.x - hitRadio && currentUse == UseBtn.Left) //往左撞
                 {
                     rb.velocity = (Vector2.left + Vector2.up) * hitPower;
+                    //fx = Instantiate(Resources.Load<GameObject>("FX/hit_vfx"), this.transform);
+                    //fx.transform.localPosition = new Vector3(0.4f, 2.2f, 0);
+
+                    status.AddScore(3);
                     Instantiate(HittiingSound);
                 }
                 else if (other.transform.localPosition.x > noHitPosition.x + hitRadio && currentUse == UseBtn.Right)//往右撞
                 {
                     rb.velocity = (Vector2.right + Vector2.up) * hitPower;
+                    //fx = Instantiate(Resources.Load<GameObject>("FX/hit_vfx"), this.transform);
+                    //fx.transform.localPosition = new Vector3(0.4f, 2.2f, 0);
+
+                    status.AddScore(3);
                     Instantiate(HittiingSound);
                 }
                 else if (currentUse == UseBtn.Forward)//往前撞
                 {
                     rb.velocity = (Vector3.forward + Vector3.up) * hitPower;
+                    //fx = Instantiate(Resources.Load<GameObject>("FX/hit_vfx"), this.transform);
+                    //fx.transform.localPosition = new Vector3(0, 2.2f, 0);
+
+                    status.AddScore(3);
                     Instantiate(HittiingSound);
                 }
                 
             } else {
                 Instantiate(Life_Losing_Sound);
+                status.Hit();
+
+                if(status.HP.Value == 0)
+                {
+                    TransitionPanel.Self.LoadScene("Menu");
+                }
             }
         }
         currentUse = UseBtn.None;
