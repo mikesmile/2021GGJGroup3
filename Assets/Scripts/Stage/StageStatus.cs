@@ -10,7 +10,7 @@ public class StageStatus : ScriptableObject
     public void Reset()
     {
         this.Score = new IntReactiveProperty(0);
-        this.HP = new IntReactiveProperty(3); // maybe this can be configured?
+        this.HP = new IntReactiveProperty(5); // maybe this can be configured?
     }
 
     public void Hit()
