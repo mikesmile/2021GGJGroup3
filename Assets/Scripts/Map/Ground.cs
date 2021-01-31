@@ -15,8 +15,6 @@ public class Ground : MonoBehaviour
     void Start()
     {
         this.rend = GetComponent<Renderer>();
-
-       
     }
 
     void Update()

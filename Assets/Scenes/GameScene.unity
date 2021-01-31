@@ -925,6 +925,8 @@ MonoBehaviour:
   SwipeForward: 0
   XValue: 8
   hitPower: 18
+  HittiingSound: {fileID: 275848110184074406, guid: d97e8fd9b1ac0fa49b8823611c27f756,
+    type: 3}
 --- !u!143 &934498259
 CharacterController:
   m_ObjectHideFlags: 0
@@ -1174,6 +1176,7 @@ MonoBehaviour:
   SwipeForward: 0
   XValue: 5
   hitPower: 0
+  HittiingSound: {fileID: 0}
 --- !u!114 &1275064691
 MonoBehaviour:
   m_ObjectHideFlags: 0
