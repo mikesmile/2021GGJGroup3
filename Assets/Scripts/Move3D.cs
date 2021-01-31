@@ -23,7 +23,7 @@ public class Move3D : MonoBehaviour
     private float _timer;
     private bool countdown;
     public int hitPower;
-
+    private Animator mainAnimator;
     enum UseBtn
     {
         None,
@@ -37,6 +37,7 @@ public class Move3D : MonoBehaviour
         transform.localPosition = rootPosition;
         noHitPosition = transform.localPosition;
         m_char = GetComponent<CharacterController>();
+        mainAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -51,6 +52,7 @@ public class Move3D : MonoBehaviour
         if (SwipeLeft)
         {
             currentUse = UseBtn.Left;
+            mainAnimator.SetTrigger("Left");
             if (m_Side == SIDE.Mid)
             {
                 noHitPosition = transform.localPosition;//等待受擊位置更新
@@ -73,6 +75,7 @@ public class Move3D : MonoBehaviour
         if(SwipeRight)
         {
             currentUse = UseBtn.Right;
+            mainAnimator.SetTrigger("Right");
             if (m_Side == SIDE.Mid)
             {
                 noHitPosition = transform.localPosition;
