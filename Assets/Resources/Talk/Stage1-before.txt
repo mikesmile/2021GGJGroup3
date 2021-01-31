@@ -1,0 +1,7 @@
+[bg 0][head 0][show-right]嘿嘿嘿...[l]經過我多日的觀察[l]，今天小紅喵一定會經過這裡。
+[hide-right][w][show-left][head 1]（...？附近好像有說話聲？）
+[w][hide-left][head 2]喵喵喵～[l]今天要去奶奶家～
+[w][show-right][head 0]來了！[l]今天一定要抓到小紅喵！！！
+[w][show-left][head 1]什麼！[l]必須趕在大野狼之前通知小紅喵！！
+[end]
+

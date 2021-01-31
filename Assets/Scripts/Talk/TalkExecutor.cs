@@ -38,7 +38,9 @@ public class TalkExecutor : MonoBehaviour
         this.background1.color = Color.clear;
         // setup character images
         this.leftImage.sprite = this.MessageGroup.leftSprite;
+        this.leftImage.SetNativeSize();
         this.rightImage.sprite = this.MessageGroup.rightSprite;
+        this.rightImage.SetNativeSize();
         // character sprite control
         for(int i = 0; i < 2; i++)
             for(int j = 0; j < 2; j++)

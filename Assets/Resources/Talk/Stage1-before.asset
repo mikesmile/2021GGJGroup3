@@ -10,14 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fceaf96409d9a444c8641d6a3df7c580, type: 3}
-  m_Name: Opening
+  m_Name: Stage1-before
   m_EditorClassIdentifier: 
-  <leftSprite>k__BackingField: {fileID: 0}
-  <rightSprite>k__BackingField: {fileID: 0}
+  <leftSprite>k__BackingField: {fileID: 21300000, guid: cf7c3d5ec54127d489cd32050d256bf0,
+    type: 3}
+  <rightSprite>k__BackingField: {fileID: 21300000, guid: 8c38157b878119a4195a96205c1e84a2,
+    type: 3}
   backgrounds:
+  - {fileID: 21300000, guid: dac68e72f4c268744bbde2444c9411ae, type: 3}
   - {fileID: 21300000, guid: bb0b32bb11dc06248a5c840a7190fbe8, type: 3}
   headlines:
-  - ???
-  - "\u8C93\u54AA\u5973\u795E"
-  - "\u5C0F\u767D\uFF08\u4E3B\u89D2\uFF09"
-  messagesFile: {fileID: 4900000, guid: 143b08ee45d24de41a49ee4f5ad7f3c1, type: 3}
+  - "\u5927\u91CE\u72FC"
+  - "\u5C0F\u767D"
+  - "\u5C0F\u7D05\u55B5"
+  messagesFile: {fileID: 4900000, guid: 825b45c90a1b2d34b94ce1ab0c04198f, type: 3}
