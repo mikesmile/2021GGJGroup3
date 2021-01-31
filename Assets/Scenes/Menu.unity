@@ -604,7 +604,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3d75f4a8e4f4b744ebf988fe2b50df1b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  StartedBGM: {fileID: 6800248068014313819, guid: 12c90a3ae1c09324b87719b8a5ae824d,
+  StartedBGM: {fileID: 480304470967272255, guid: 93c1420c65c474448a5a3d1b6f73b30b,
     type: 3}
 --- !u!4 &751912537
 Transform:

@@ -24,6 +24,12 @@ public class Move3D : MonoBehaviour
     private bool countdown;
     public int hitPower;
     private Animator mainAnimator;
+    public GameObject HittiingSound;
+    public GameObject Life_Losing_Sound;
+    public bool Hit;
+    // HACK: prevent duplicated trigger
+    private bool hasBeenHit;
+
     enum UseBtn
     {
         None,
@@ -55,6 +61,7 @@ public class Move3D : MonoBehaviour
             mainAnimator.SetTrigger("Left");
             if (m_Side == SIDE.Mid)
             {
+                Hit = true;
                 noHitPosition = transform.localPosition;//等待受擊位置更新
                 m_Side = SIDE.Left;
 
@@ -64,6 +71,7 @@ public class Move3D : MonoBehaviour
             }
             else if(m_Side == SIDE.Right)
             {
+                Hit = true;
                 noHitPosition = transform.localPosition;
                 m_Side = SIDE.Mid;
 
@@ -74,6 +82,7 @@ public class Move3D : MonoBehaviour
         }
         if(SwipeRight)
         {
+            Hit = true;
             currentUse = UseBtn.Right;
             mainAnimator.SetTrigger("Right");
             if (m_Side == SIDE.Mid)
@@ -87,6 +96,7 @@ public class Move3D : MonoBehaviour
             }
             else if(m_Side == SIDE.Left)
             {
+                Hit = true;
                 noHitPosition = transform.localPosition;
                 m_Side = SIDE.Mid;
 
@@ -98,6 +108,7 @@ public class Move3D : MonoBehaviour
 
         if (SwipeForward)
         {
+            Hit = true;
             currentUse = UseBtn.Forward;
             _timer = Time.time;
             countdown = true;
@@ -116,6 +127,13 @@ public class Move3D : MonoBehaviour
             }
         }
 
+        if(currentUse != UseBtn.Forward )
+        {
+            if(currentUse != UseBtn.Right && currentUse != UseBtn.Left)
+            {
+                Hit = false;
+            }
+        }
     }
 
 
@@ -123,51 +141,50 @@ public class Move3D : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "CanHit" && currentUse != UseBtn.None)
+        // if (Hit == false)
+        // {
+        //    Instantiate(Life_Losing_Sound);
+        // }
+
+        // if (other.tag == "CanHit" && currentUse != UseBtn.None)
+        if (other.tag == "CanHit")
         {
-            //Debug.LogError(currentUse);
-
-            other.GetComponent<obstacleRun>().stopRun = true;
-            other.GetComponent<obstacleRun>().objectPoolHitBack = true;
-            other.GetComponent<obstacleRun>()._timer = Time.time;//reset timer
-
-            //Debug.LogError(noHitPosition);
-            //Debug.LogError("Enemy:"+other.transform.localPosition.x + " main:"+noHitPosition.x);
-            var rb = other.GetComponent<Rigidbody>();
-            // if(Impulse.RightImpulse)
-            //     // this.rig.AddForce(thrust, 0, 0, ForceMode.Impulse);
-            //     this.rig.velocity = Vector2.right * thrust;
-            // else if(Impulse.LeftImpulse)
-            //     // this.rig.AddForce(-thrust, 0, 0, ForceMode.Impulse);
-            //          this.rig.velocity = Vector2.left * thrust;
-            rb.isKinematic = false;
-
-            if (other.transform.localPosition.x < noHitPosition.x - hitRadio && currentUse == UseBtn.Left) //往左撞
+            this.hasBeenHit = !this.hasBeenHit;
+            if(this.hasBeenHit)
+                return;
+            if(currentUse != UseBtn.None)
             {
-                //Vector3 dir1 = GetRandomVector3(new Vector3(0, 0.5f, 5));
-                //Vector3 dir2 = GetRandomVector3(new Vector3(-1, 0.5f, 5));
-                //Vector3 dir3 = GetRandomVector3(new Vector3(-1, 0, 0));
-                //Debug.LogError((dir1 + dir2 + dir3).normalized * 12);
-                //rb.velocity = (dir1 + dir2 + dir3).normalized * 12;
-                rb.velocity = (Vector2.left + Vector2.up) * hitPower;
-            }
-            else if (other.transform.localPosition.x > noHitPosition.x + hitRadio && currentUse == UseBtn.Right)//往右撞
-            {
-                rb.velocity = (Vector2.right + Vector2.up) * hitPower;
-            }
-            else if (currentUse == UseBtn.Forward)
-            {
-                rb.velocity = (Vector3.forward + Vector3.up) * hitPower;
-            }
+                other.GetComponent<obstacleRun>().stopRun = true;
+                other.GetComponent<obstacleRun>().objectPoolHitBack = true;
+                other.GetComponent<obstacleRun>()._timer = Time.time;//reset timer
 
+                var rb = other.GetComponent<Rigidbody>();
+                rb.isKinematic = false;
+
+                if (other.transform.localPosition.x < noHitPosition.x - hitRadio && currentUse == UseBtn.Left) //往左撞
+                {
+                    rb.velocity = (Vector2.left + Vector2.up) * hitPower;
+                    Instantiate(HittiingSound);
+                }
+                else if (other.transform.localPosition.x > noHitPosition.x + hitRadio && currentUse == UseBtn.Right)//往右撞
+                {
+                    rb.velocity = (Vector2.right + Vector2.up) * hitPower;
+                    Instantiate(HittiingSound);
+                }
+                else if (currentUse == UseBtn.Forward)//往前撞
+                {
+                    rb.velocity = (Vector3.forward + Vector3.up) * hitPower;
+                    Instantiate(HittiingSound);
+                }
+                
+            } else {
+                Instantiate(Life_Losing_Sound);
+            }
         }
-
         currentUse = UseBtn.None;
         noHitPosition = transform.localPosition;//無真正受傷撞擊時更新位置
+
     }
-  
-
-
 
     public Vector3 GetRandomVector3( Vector3 origin )
     {
@@ -175,3 +192,4 @@ public class Move3D : MonoBehaviour
         return origin * r;
     }
 }
+
