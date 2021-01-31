@@ -15,6 +15,7 @@ public class obstacleRun : MonoBehaviour
     public float _timer;
     // Start is called before the first frame update
 
+    public GameObject animation;
     void Start()
     {
         
@@ -56,7 +57,6 @@ public class obstacleRun : MonoBehaviour
 
         if (!stopRun)
         {
-            //transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * speed);
             transform.localPosition += ((Vector3.back.normalized) * Time.deltaTime * obstacleSpeed);
             if (transform.localPosition.z <= targetZ)
             {
@@ -66,6 +66,32 @@ public class obstacleRun : MonoBehaviour
                 //this.gameObject.SetActive(false);
                 //Destroy(this.gameObject, 3);
             }
+            //if (this.transform.GetChild(0).gameObject.activeSelf)
+            //{
+
+            //    this.transform.GetChild(0).localPosition += ((Vector3.back.normalized) * Time.deltaTime * obstacleSpeed);
+            //    if (this.transform.GetChild(0).localPosition.z <= targetZ)
+            //    {
+            //        stopRun = true;
+            //        GameObjectPool.Self.BackToPool(this.gameObject);
+            //        //ObjectPool.Self.Recovery(this.gameObject);
+            //        //this.gameObject.SetActive(false);
+            //        //Destroy(this.gameObject, 3);
+            //    }
+            //}
+            //else
+            //{
+            //    //transform.Translate(new Vector3(0, 0, -1) * Time.deltaTime * speed);
+            //    transform.localPosition += ((Vector3.back.normalized) * Time.deltaTime * obstacleSpeed);
+            //    if (transform.localPosition.z <= targetZ)
+            //    {
+            //        stopRun = true;
+            //        GameObjectPool.Self.BackToPool(this.gameObject);
+            //        //ObjectPool.Self.Recovery(this.gameObject);
+            //        //this.gameObject.SetActive(false);
+            //        //Destroy(this.gameObject, 3);
+            //    }
+            //}
         }
 
         

@@ -936,6 +936,7 @@ GameObject:
   - component: {fileID: 531321109}
   - component: {fileID: 531321108}
   - component: {fileID: 531321112}
+  - component: {fileID: 531321113}
   m_Layer: 8
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1085,6 +1086,19 @@ MonoBehaviour:
   blendDistance: 0
   weight: 1
   priority: 0
+--- !u!114 &531321113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 531321107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b153849e6056dd84e9e7b40f64419737, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  status: {fileID: 11400000, guid: 09cc99ea922546841a235a092287154f, type: 2}
 --- !u!1 &552745320
 GameObject:
   m_ObjectHideFlags: 0
@@ -8255,7 +8269,6 @@ MonoBehaviour:
   obstacleSpeed: 20
   obstacle:
   - {fileID: 21300000, guid: 884b386bd46fd4d08948ec534e3e3ac2, type: 3}
-  animator: {fileID: 9100000, guid: 36a331df984fc42ee8b3c10ea599a09b, type: 2}
   spawnTime: 0.7
 --- !u!1 &3134686951929447574
 GameObject:

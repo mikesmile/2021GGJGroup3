@@ -25,7 +25,7 @@ public class GameObjectPool : UIBase<GameObjectPool>
         }
     }
 
-    public GameObject GetPooledInstance(Transform parent, Sprite sprite, AnimatorController animator)
+    public GameObject GetPooledInstance(Transform parent, Sprite sprite)
     {
         //Debug.LogError(parent.gameObject.name);
 
@@ -39,7 +39,6 @@ public class GameObjectPool : UIBase<GameObjectPool>
 
             m_availableObjects.RemoveAt(lastIndex);
             if(sprite != null) go.GetComponent<SpriteRenderer>().sprite = sprite;
-            if(animator != null) go.GetComponent<Animator>().runtimeAnimatorController = animator;
 
             if(sprite == null)
                 go.tag = "CanHit";

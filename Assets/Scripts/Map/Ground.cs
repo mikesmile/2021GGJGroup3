@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEditor.Animations;
 
 public class Ground : MonoBehaviour
 {
@@ -10,7 +9,7 @@ public class Ground : MonoBehaviour
     private Renderer rend;
 
     public List<Sprite> obstacle;
-    public AnimatorController animator;
+    //public AnimatorController animator;
     public float spawnTime = 0.2f;
     private float _timer;
 
@@ -53,8 +52,8 @@ public class Ground : MonoBehaviour
         int x = UnityEngine.Random.Range(-15, 15);
         if (r == 0)
         {
-            GameObject obstacleCopy = GameObjectPool.Self.GetPooledInstance(Config.Self.transform, spawn, null);
-            obstacleCopy.GetComponent<Animator>().runtimeAnimatorController = null;
+            GameObject obstacleCopy = GameObjectPool.Self.GetPooledInstance(Config.Self.transform, spawn );
+            obstacleCopy.transform.GetChild(0).gameObject.SetActive(false);
             obstacleCopy.transform.localScale = new Vector3(1, 1, 1);
             //GameObject obstacleCopy = ObjectPool.Self.ReUse(new Vector3(x, 4, 11), Quaternion.identity, spawn);
             obstacleCopy.transform.localPosition = new Vector3(x, 4.31f, 11);
@@ -65,7 +64,8 @@ public class Ground : MonoBehaviour
         }
         else if (r == 1)
         {
-            GameObject obstacleCopy = GameObjectPool.Self.GetPooledInstance(Config.Self.transform, null, animator);
+            GameObject obstacleCopy = GameObjectPool.Self.GetPooledInstance(Config.Self.transform, null );
+            obstacleCopy.transform.GetChild(0).gameObject.SetActive(true);
             obstacleCopy.GetComponent<SpriteRenderer>().sprite = null;
             obstacleCopy.transform.localScale = new Vector3(3, 3, 1);
             //GameObject obstacleCopy = ObjectPool.Self.ReUse(new Vector3(x, 4, 11), Quaternion.identity, spawn);
