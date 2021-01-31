@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class GameObjectPool : UIBase<GameObjectPool>
 {
-
+    public List<Sprite> canHitData;
     [SerializeField]
     private GameObject m_prefab;
     [SerializeField]
@@ -26,17 +26,31 @@ public class GameObjectPool : UIBase<GameObjectPool>
 
     public GameObject GetPooledInstance(Transform parent, Sprite sprite )
     {
-        lock (m_availableObjects)
-        {
+        //Debug.LogError(parent.gameObject.name);
+
             int lastIndex = m_availableObjects.Count - 1;
             if (lastIndex >= 0)
             {
                 GameObject go = m_availableObjects[lastIndex];
+
+                //BoxCollider boxCollider = go.GetComponent<BoxCollider>();
+                //if(boxCollider != null) Destroy(boxCollider);
+
                 m_availableObjects.RemoveAt(lastIndex);
-                go.GetComponent<SpriteRenderer>().sprite = sprite; 
+                go.GetComponent<SpriteRenderer>().sprite = sprite;
+
+                if (canHitData.Contains(sprite))
+                    go.tag = "CanHit";
+                else
+                    go.tag = "CanNotHit";
+
                 go.SetActive(true);
+                //go.AddComponent<BoxCollider>();
+                //go.GetComponent<BoxCollider>().isTrigger = true;
+
                 if (go.transform.parent != parent)
                 {
+                
                     go.transform.SetParent(parent);
                 }
                 return go;
@@ -44,18 +58,15 @@ public class GameObjectPool : UIBase<GameObjectPool>
             else
             {
                 GameObject go = Instantiate<GameObject>(m_prefab, Config.Self.transform);
-                go.SetActive(false);
+                //go.SetActive(false);
                 return go;
             }
-        }
+
     }
 
     public void BackToPool(GameObject go)
     {
-        lock (m_availableObjects)
-        {
-            m_availableObjects.Add(go);
-            go.SetActive(false);
-        }
+        m_availableObjects.Add(go);
+        go.SetActive(false);
     }
 }
