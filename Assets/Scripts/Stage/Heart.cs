@@ -8,7 +8,7 @@ public class Heart : MonoBehaviour
 {
     public void Break()
     {
-        GetComponent<Image>().DOColor(new Color(0, 0, 0, 0), 0.1f);
+        GetComponent<Image>().DOColor(Color.clear, 0.1f);
     }
 
     public void Reset()
